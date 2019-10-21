@@ -34,3 +34,21 @@
 [6] E: Could not connect to client. :-(
 [6] Log closed at 2019-10-21 13:05:35
 [6]
+[6] Log opened at 2019-10-21 13:18:44
+[6] I: Connecting to configured address/port: host.docker.internal:9000.
+[6] W: Creating socket for 'host.docker.internal:9000', poll success, but error: Operation now in progress (29).
+[6] E: Could not connect to client. :-(
+[6] Log closed at 2019-10-21 13:18:44
+[6]
+[7] Log opened at 2019-10-21 13:18:45
+[7] I: Connecting to configured address/port: host.docker.internal:9000.
+[7] W: Creating socket for 'host.docker.internal:9000', poll success, but error: Operation now in progress (29).
+[7] E: Could not connect to client. :-(
+[7] Log closed at 2019-10-21 13:18:45
+[7]
+[8] Log opened at 2019-10-21 13:21:21
+[8] I: Connecting to configured address/port: host.docker.internal:9000.
+[8] W: Creating socket for 'host.docker.internal:9000', poll success, but error: Operation now in progress (29).
+[8] E: Could not connect to client. :-(
+[8] Log closed at 2019-10-21 13:21:21
+[8]
