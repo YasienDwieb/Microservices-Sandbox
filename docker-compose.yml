@@ -32,8 +32,7 @@ services:
             - db
 
     db:
-        image: mysql:8.0.18
-        command: --default-authentication-plugin=mysql_native_password
+        image: mariadb:latest
         restart: always
         ports:
             - "3306:3306"
