@@ -1,13 +1,13 @@
 version: "2"
 services:
     web:
-        image: nginx:latest
+        build:
+          context: ./server
         restart: always
         ports:
             - "8080:80"
         volumes:
             - ./code:/code
-            - ./conf.d/site.conf:/etc/nginx/conf.d/default.conf
         networks:
             - code-network
         depends_on: 
@@ -19,7 +19,7 @@ services:
         restart: always
         volumes:
             - ./code:/code
-            - ./html:/var/www/html
+            - ./log:/var/www/html
         networks:
             - code-network
         environment:
