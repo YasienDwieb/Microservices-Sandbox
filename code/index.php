@@ -1,14 +1,19 @@
 <?php
-$a = 9;
-$b = 19;
-echo "hello world: {$a}+{$b} = " . strval(intval($a) + intval($b))."<br/>";
+// Version
+define('VERSION', '2.3.0.2');
 
-$host="db";
-$db=getenv('MYSQL_DATABASE');
-$user=getenv('MYSQL_USER');
-$pass=getenv('MYSQL_PASSWORD');
-$port=getenv('MYSQL_PORT');
+// Configuration
+if (is_file('config.php')) {
+	require_once('config.php');
+}
 
-$conn= mysqli_connect($host,$user,$pass,$db,$port);
+// Install
+if (!defined('DIR_APPLICATION')) {
+	header('Location: install/index.php');
+	exit;
+}
 
-var_dump($conn);
+// Startup
+require_once(DIR_SYSTEM . 'startup.php');
+
+start('catalog');
