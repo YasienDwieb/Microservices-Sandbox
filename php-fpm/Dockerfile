@@ -1,4 +1,4 @@
-FROM php:fpm
+FROM php:7.2-fpm
 RUN apt-get update -y && apt-get install -y libpng-dev
 RUN pecl install xdebug && docker-php-ext-enable xdebug \
     && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
@@ -10,12 +10,13 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug \
     && echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.idekey=VSCODE" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_handler=dbgp" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.default_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && docker-php-ext-install mysqli \ 
-    && docker-php-ext-install gd \
-    && docker-php-ext-install mbstring
-
+    && echo "xdebug.default_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN docker-php-ext-install mysqli \ 
+    && docker-php-ext-install gd
 RUN apt-get install -y \
     zlib1g-dev \
     libzip-dev \
-    && docker-php-ext-install zip \
+    && docker-php-ext-install zip
+RUN apt-get install -y libmcrypt-dev
+RUN pecl install mcrypt-1.0.1 \
+    && docker-php-ext-enable mcrypt
