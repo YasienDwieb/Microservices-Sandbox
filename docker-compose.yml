@@ -7,7 +7,7 @@ services:
         ports:
             - "8080:80"
         volumes:
-            - ./code/magento2:/code
+            - ./code:/code
         networks:
             - code-network
         depends_on: 
@@ -22,8 +22,7 @@ services:
           context: ./php-fpm
         restart: always
         volumes:
-            - ./code/magento2-sample-data:/magento2-sample-data
-            - ./code/magento2:/code
+            - ./code:/code
             - ./log:/var/www/html
         networks:
             - code-network
@@ -50,6 +49,16 @@ services:
             MYSQL_PASSWORD: "mypass"
             MYSQL_DATABASE: "awesomedb"
 
+    redis:
+        image: redis:latest
+        restart: always
+        ports:
+            - "6379:6379"
+        networks: 
+            - code-network
+        volumes: 
+            - redis-data:/data
+
     adminer:
         image: adminer:latest
         restart: always
@@ -64,3 +73,4 @@ networks:
 
 volumes: 
     db-data:
+    redis-data:
