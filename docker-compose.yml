@@ -7,7 +7,7 @@ services:
         ports:
             - "8080:80"
         volumes:
-            - ./code:/code
+            - ./code/magento2:/code
         networks:
             - code-network
         depends_on: 
@@ -18,7 +18,7 @@ services:
           context: ./php-fpm
         restart: always
         volumes:
-            - ./code:/code
+            - ./code/magento2:/code
             - ./log:/var/www/html
         networks:
             - code-network

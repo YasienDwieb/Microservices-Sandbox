@@ -43,3 +43,7 @@ RUN apt-get update \
     && apt-get -y install libxml2-dev php-soap \
     && pear install -a SOAP-0.13.0 \
     && docker-php-ext-install soap
+# Magento specific config to handle tons of requests
+RUN sed -i 's/^.*pm.max_children = .*$/pm.max_children = 500/' /usr/local/etc/php-fpm.d/www.conf
+RUN sed -i 's/^.*pm.max_spare_servers = .*$/pm.max_spare_servers = 20/' /usr/local/etc/php-fpm.d/www.conf
+RUN sed -i 's/^.*pm.start_servers = .*$/pm.start_servers = 20/' /usr/local/etc/php-fpm.d/www.conf
