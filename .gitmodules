@@ -1,6 +1,0 @@
-[submodule "code/magento2"]
-	path = code/magento2
-	url = git@github.com:YasienDwieb/magento2.git
-[submodule "code/magento2-sample-data"]
-	path = code/magento2-sample-data
-	url = git@github.com:YasienDwieb/magento2-sample-data.git
