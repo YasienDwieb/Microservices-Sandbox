@@ -12,12 +12,17 @@ services:
             - code-network
         depends_on: 
             - php
+        logging:
+            driver: gelf
+            options:
+                gelf-address: "udp://localhost:12201"
 
     php:
         build:
           context: ./php-fpm
         restart: always
         volumes:
+            - ./code/magento2-sample-data:/magento2-sample-data
             - ./code/magento2:/code
             - ./log:/var/www/html
         networks:
@@ -44,9 +49,10 @@ services:
             MYSQL_USER: "mysuser"
             MYSQL_PASSWORD: "mypass"
             MYSQL_DATABASE: "awesomedb"
-    
+
     adminer:
         image: adminer:latest
+        restart: always
         ports:
             - "8088:8080"
         networks: 
