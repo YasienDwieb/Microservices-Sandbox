@@ -47,3 +47,7 @@ RUN apt-get update \
 RUN sed -i 's/^.*pm.max_children = .*$/pm.max_children = 500/' /usr/local/etc/php-fpm.d/www.conf
 RUN sed -i 's/^.*pm.max_spare_servers = .*$/pm.max_spare_servers = 20/' /usr/local/etc/php-fpm.d/www.conf
 RUN sed -i 's/^.*pm.start_servers = .*$/pm.start_servers = 20/' /usr/local/etc/php-fpm.d/www.conf
+# Redis extension
+RUN pecl install -o -f redis \
+&&  rm -rf /tmp/pear \
+&&  docker-php-ext-enable redis
