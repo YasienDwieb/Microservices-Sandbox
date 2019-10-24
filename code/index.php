@@ -1,17 +1,13 @@
 <?php
-/**
- * Front to the WordPress application. This file doesn't do anything, but loads
- * wp-blog-header.php which does and tells WordPress to load the theme.
- *
- * @package WordPress
- */
+$http = new swoole_http_server("0.0.0.0", 8080);
 
-/**
- * Tells WordPress to load the WordPress theme and output it.
- *
- * @var bool
- */
-define( 'WP_USE_THEMES', true );
+$http->on("start", function ($server) {
+    echo "Swoole http server is started at http://127.0.0.1:8080\n";
+});
 
-/** Loads the WordPress Environment and Template */
-require( dirname( __FILE__ ) . '/wp-blog-header.php' );
+$http->on("request", function ($request, $response) {
+    $response->header("Content-Type", "text/plain");
+    $response->end(print_r("Hello world", true));
+});
+
+$http->start();

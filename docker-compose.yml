@@ -1,22 +1,11 @@
 version: "3"
 services:
-    web:
-        build:
-          context: ./server/nginx
-        restart: always
-        ports:
-            - "8080:80"
-        volumes:
-            - ./code:/code
-        networks:
-            - code-network
-        depends_on: 
-            - php
-
     php:
         build:
           context: ./php-fpm
         restart: always
+        ports:
+            - "8080:8080"
         volumes:
             - ./code:/code
             - ./log:/var/www/html
@@ -44,9 +33,20 @@ services:
             MYSQL_USER: "mysuser"
             MYSQL_PASSWORD: "mypass"
             MYSQL_DATABASE: "awesomedb"
-    
+
+    redis:
+        image: redis:latest
+        restart: always
+        ports:
+            - "6379:6379"
+        networks: 
+            - code-network
+        volumes: 
+            - redis-data:/data
+
     adminer:
         image: adminer:latest
+        restart: always
         ports:
             - "8088:8080"
         networks: 
@@ -58,3 +58,4 @@ networks:
 
 volumes: 
     db-data:
+    redis-data:
