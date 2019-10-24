@@ -51,3 +51,8 @@ RUN sed -i 's/^.*pm.start_servers = .*$/pm.start_servers = 20/' /usr/local/etc/p
 RUN pecl install -o -f redis \
 &&  rm -rf /tmp/pear \
 &&  docker-php-ext-enable redis
+#Swoole extension
+RUN pecl install swoole \
+&& docker-php-ext-enable swoole
+EXPOSE 8080
+CMD [ "php","/code/index.php" ]

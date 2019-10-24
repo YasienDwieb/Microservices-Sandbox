@@ -1,26 +1,11 @@
 version: "3"
 services:
-    web:
-        build:
-          context: ./server/apache
-        restart: always
-        ports:
-            - "8080:80"
-        volumes:
-            - ./code:/code
-        networks:
-            - code-network
-        depends_on: 
-            - php
-        logging:
-            driver: gelf
-            options:
-                gelf-address: "udp://localhost:12201"
-
     php:
         build:
           context: ./php-fpm
         restart: always
+        ports:
+            - "8080:8080"
         volumes:
             - ./code:/code
             - ./log:/var/www/html
